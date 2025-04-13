@@ -1,11 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './src/config/database.js';
-import URL from './src/models/URL.js';
-import User from './src/models/User.js';
 import { securityMiddleware } from './src/middlewares/security.js';
 import { utilityMiddleware } from './src/middlewares/utility.js';
 import { errorHandler } from './src/middlewares/error.js';
+import authRoutes from './src/routes/authRoutes.js';
+import urlRoutes from './src/routes/urlRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -19,6 +19,10 @@ utilityMiddleware(app);
 
 // Connect to MongoDB
 connectDB();   
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/urls', urlRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
