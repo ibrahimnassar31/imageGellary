@@ -7,7 +7,8 @@ const router = express.Router();
 // Public routes
 router.post('/signup', signup);
 router.post('/signin', signin);
-router.get('/logout', logout);
-// Protected routes
 
-export default router; 
+// Protected routes
+router.get('/logout', protect, logout);
+
+export default router;
